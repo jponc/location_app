@@ -27,5 +27,35 @@ module LocationApp
       end
       "#{self.class.resource_url}/#{CGI.escape(id)}"
     end
+
+    def serialize
+      {
+        'data' => {
+          'type' => class_type,
+          'id' => self.id,
+          'attributes' => attributes
+        }
+      }
+    end
+
+    def attributes
+      attrs = {}
+      attr_keys = attribute_keys
+      attr_keys.delete('id')
+      attr_keys.each do |attr_key|
+        attrs[attr_key] = self.send(attr_key)
+      end
+      attrs
+    end
+
+    def attribute_keys
+      self.instance_variables.map do |var|
+        var.to_s.gsub('@', '')
+      end
+    end
+
+    def class_type
+      self.class.class_name.downcase.pluralize
+    end
   end
 end

@@ -10,7 +10,8 @@ module LocationApp
     end
 
     def self.autocomplete(query)
-
+      url = File.join(resource_url, "autocomplete?query=#{query}")
+      list(url)
     end
   end
 end
