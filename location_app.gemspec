@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "location_app"
   spec.version       = LocationApp::VERSION
   spec.authors       = ["Julian Alfonso Ponce"]
-  spec.email         = ["hello@julianponce.com"]
+  spec.email         = ["julian@90seconds.tv"]
 
   spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
@@ -29,4 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_dependency "httparty", "0.13.7"
+  spec.add_dependency "activesupport"
+
 end
