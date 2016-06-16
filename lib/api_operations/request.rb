@@ -14,7 +14,7 @@ module LocationApp
       end
 
       def full_url(url)
-        "#{LocationApp.api_base}#{url}"
+        File.join(LocationApp.api_base, url)
       end
 
       def headers

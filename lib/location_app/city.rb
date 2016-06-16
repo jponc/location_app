@@ -13,5 +13,10 @@ module LocationApp
       url = File.join(resource_url, "autocomplete?query=#{query}")
       list(url)
     end
+
+    def computed_multiplier
+      url = File.join(self.class.resource_url, "computed_multiplier")
+      self.class.post(url, {id: id})
+    end
   end
 end

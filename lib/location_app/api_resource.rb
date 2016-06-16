@@ -22,7 +22,7 @@ module LocationApp
     end
 
     def resource_url
-      unless id = self['id']
+      unless id = self.id
         raise InvalidRequestError.new("Could not determine which URL to request: #{self.class} instance has invalid ID: #{id.inspect}", 'id')
       end
       "#{self.class.resource_url}/#{CGI.escape(id)}"
@@ -30,28 +30,17 @@ module LocationApp
 
     def serialize
       {
-        'data' => {
-          'type' => class_type,
-          'id' => self.id,
-          'attributes' => attributes
-        }
+        'data' => serialize_data
       }
     end
 
-    def attributes
-      attrs = {}
-      attr_keys = attribute_keys
-      attr_keys.delete('id')
-      attr_keys.each do |attr_key|
-        attrs[attr_key] = self.send(attr_key)
-      end
-      attrs
-    end
-
-    def attribute_keys
+    def serialize_data
+      data = {}
       self.instance_variables.map do |var|
-        var.to_s.gsub('@', '')
+        key = var.to_s.gsub('@', '')
+        data[key] = self.send(key)
       end
+      data
     end
 
     def class_type
