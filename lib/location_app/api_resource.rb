@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string'
+
 module LocationApp
   class APIResource
     extend LocationApp::APIOperations::Request
